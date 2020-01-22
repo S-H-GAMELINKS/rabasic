@@ -1,6 +1,9 @@
-<% @cart.cart_items.each do |item| %>
+<% if @cart %>
+  <% @cart.cart_items.each do |item| %>
     <%= item.item.name %>
     <%= item.item.price %>
     <%= item.item.description %>
     <%= item.quantity %>
-<% end %> 
+    <%= link_to 'Remove Items', cart_path(@cart, params: { product_id: item.item.id}), method: 'delete', data: {confirm: 'OK?'} %>
+  <% end %>
+<% end %>
