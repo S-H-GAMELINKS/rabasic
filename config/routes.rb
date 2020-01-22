@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :carts
   get 'users/mypage/edit', to: 'users#edit'
   get 'users/mypage', to: 'users#mypage'
   patch '/users/mypage', to: 'users#update'
