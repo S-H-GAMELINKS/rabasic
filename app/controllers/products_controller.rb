@@ -2,10 +2,12 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :like, :edit, :update, :destroy]
   before_action :set_category, only: [:new, :edit]
 
+  PRODUCTS_PER = 12
+
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.page(params[:page]).per(PRODUCTS_PER)
   end
 
   # GET /products/1
