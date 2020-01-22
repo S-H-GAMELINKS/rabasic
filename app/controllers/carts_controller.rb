@@ -25,7 +25,7 @@ class CartsController < ApplicationController
   # POST /carts
   # POST /carts.json
   def create
-    if current_user.carts.empty?
+    if current_user.carts.empty? or current_user.carts.last.done
       @cart = current_user.carts.build
       @cart.save!
     else
