@@ -66,3 +66,4 @@ gem 'devise'
 
 # Using Bootstrap4
 gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
