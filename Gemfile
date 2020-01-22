@@ -70,3 +70,6 @@ gem 'jquery-rails'
 
 # Using Socialization
 gem 'socialization'
+
+# Using Kaminari
+gem 'kaminari'
