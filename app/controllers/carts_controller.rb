@@ -5,7 +5,7 @@ class CartsController < ApplicationController
   # GET /carts
   # GET /carts.json
   def index
-    @carts = Cart.all
+    @cart = current_user.carts.get_active_cart
   end
 
   # GET /carts/1
