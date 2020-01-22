@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   end
 
   def mypage
+    @likes = current_user.likees(Product)
   end
 
   def update
