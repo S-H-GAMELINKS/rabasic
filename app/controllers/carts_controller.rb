@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+  before_action :set_product
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
@@ -24,17 +25,16 @@ class CartsController < ApplicationController
   # POST /carts
   # POST /carts.json
   def create
-    @cart = Cart.new(cart_params)
-
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
-        format.json { render :show, status: :created, location: @cart }
-      else
-        format.html { render :new }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
+    if current_user.carts.empty?
+      @cart = current_user.carts.build
+      @cart.save!
+    else
+      @cart = current_user.carts.last
     end
+    @cart.add(@product, @product.price)
+    @cart.save
+
+    redirect_to @product
   end
 
   # PATCH/PUT /carts/1
@@ -65,6 +65,10 @@ class CartsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
       @cart = Cart.find(params[:id])
+    end
+
+    def set_product
+      @product = Product.find(params[:product_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
